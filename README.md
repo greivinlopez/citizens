@@ -3,7 +3,9 @@ citizens
 
 Go solution to provide a fast way to consult Costa Rican citizens basic information
 
-### Ubuntu Server Setup
+## Ubuntu Server Setup
+
+### Install MongoDB
 
 Install MongoDB following this instructions: [Installing MongoDB on Ubuntu](https://www.digitalocean.com/community/tutorials/how-to-install-mongodb-on-ubuntu-12-04)
 
@@ -62,8 +64,7 @@ There are other security measures you can follow regarding the MongoDB server:
 
 https://www.digitalocean.com/community/tutorials/how-to-securely-configure-a-production-mongodb-server
 
-
-## Installing Go
+### Installing Go
 
 ```console
 cd ~
@@ -80,7 +81,14 @@ echo "export PATH=$PATH:/usr/local/go/bin" >> ~/.profile
 source ~/.profile
 ```
 
-## Compile Server
+### Install Dependencies
+
+```console
+apt-get install git
+apt-get install bzr
+```
+
+### Compile Server
 
 ```console
 sudo nano ~/.bash_profile
@@ -109,6 +117,15 @@ go get github.com/go-martini/martini
 go get github.com/greivinlopez/skue
 ```
 
+Download source code
+
+```console
+mkdir citizens
+cd citizens
+git init
+git remote add --track master origin https://greivin_lopez@bitbucket.org/necesitotaxi/admin-site.git
+git pull
+```
 
 
 
