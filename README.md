@@ -9,15 +9,19 @@ Install MongoDB following this instructions: [Installing MongoDB on Ubuntu](http
 
 Run the mongo shell:
 
-`mongo`
+```console
+mongo
+```
 
 Add admin user to mongo:
 
-`use admin`
+```javascript
+use admin
 
-`db.addUser( { user: "adminuser",
+db.addUser( { user: "adminuser",
               pwd: "adminpassword",
-              roles: [ "userAdminAnyDatabase" ] } )`
+              roles: [ "userAdminAnyDatabase" ] } )
+```
 
 Edit mongodb.conf and add auth=true
 
@@ -25,11 +29,15 @@ http://stackoverflow.com/questions/6235808/how-can-i-restart-mongodb-with-auth-o
 
 Restart mongodb service
 
-`sudo service mongodb restart`
+```console
+sudo service mongodb restart
+```
 
 Run the MongoDB shell
 
-`mongo`
+```console
+mongo
+```
 
 Create a user for necesitotaxi
 
@@ -46,7 +54,10 @@ db.auth('dbuser', 'dbpass')
 
 Create a dummy document to save the new database permanently
 
-`db.users.save( {username:"glopez"} )`
+```javascript
+db.users.save( {username:"glopez"} )
+```
+
 
 
 
