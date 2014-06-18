@@ -20,7 +20,8 @@ Add admin user to mongo:
               roles: [ "userAdminAnyDatabase" ] } )`
 
 Edit mongodb.conf and add auth=true
-(http://stackoverflow.com/questions/6235808/how-can-i-restart-mongodb-with-auth-option-in-ubuntu-10-04)
+
+http://stackoverflow.com/questions/6235808/how-can-i-restart-mongodb-with-auth-option-in-ubuntu-10-04
 
 Restart mongodb service
 
@@ -28,7 +29,25 @@ Restart mongodb service
 
 Run the MongoDB shell
 
-`mongo
+`mongo`
+
+Create a user for necesitotaxi
+
+```javascript
+use admin
+db.auth('adminuser', 'adminpassword')
+use people
+db.addUser( { user: "dbuser",
+              pwd: "dbpass",
+              roles: [ "readWrite", "dbAdmin" ]
+            } )
+db.auth('dbuser', 'dbpass')
+```
+
+Create a dummy document to save the new database permanently
+
+`db.users.save( {username:"glopez"} )`
+
 
 
 
