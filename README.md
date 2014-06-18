@@ -58,6 +58,28 @@ Create a dummy document to save the new database permanently
 db.users.save( {username:"glopez"} )
 ```
 
+There are other security measures you can follow regarding the MongoDB server:
+
+https://www.digitalocean.com/community/tutorials/how-to-securely-configure-a-production-mongodb-server
+
+
+## Installing Go
+
+```console
+cd ~
+wget http://golang.org/dl/go1.2.2.linux-amd64.tar.gz
+tar -zxvf go1.2.2.linux-amd64.tar.gz
+rm go1.2.2.linux-amd64.tar.gz
+```
+
+Binary distributions assume they will be installed at /usr/local/go Otherwise, you must set the GOROOT environment variable
+
+```console
+sudo mv ~/go /usr/local
+echo "export PATH=$PATH:/usr/local/go/bin" >> ~/.profile
+source ~/.profile
+```
+
 
 
 
