@@ -88,7 +88,7 @@ apt-get install git
 apt-get install bzr
 ```
 
-### Compile Server
+### Server Configuration
 
 ```console
 sudo nano ~/.bash_profile
@@ -109,6 +109,8 @@ Save the file and return to the command line.  Run the new configuration
 source ~/.bash_profile
 ```
 
+## Running Server
+
 Install package dependencies
 
 ```console
@@ -123,9 +125,46 @@ Download source code
 mkdir citizens
 cd citizens
 git init
-git remote add --track master origin https://greivin_lopez@bitbucket.org/necesitotaxi/admin-site.git
+git remote add --track master origin https://github.com/greivinlopez/citizens.git
 git pull
 ```
 
+### Fill database
 
+Download the complete "Padron Electoral":
+
+```console
+cd filldb
+curl -O http://www.tse.go.cr/zip/padron/padron_completo.zip
+```
+
+Install zip and unzip facilities to the server:
+
+```console
+sudo apt-get install zip unzip
+```
+
+Unzip the archived file:
+
+```console
+unzip padron_completo.zip
+```
+
+Compile and fill database
+
+```console
+go build filldb.go
+./filldb
+```
+
+The filldb command will extract the data from the "padron electoral" files and create the documents on the database. The process will run for 5-10 minutes.
+
+### Compile and run the Server
+
+```console
+cd ..
+cd server
+go build server.go
+./server
+```
 
