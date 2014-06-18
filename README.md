@@ -3,7 +3,7 @@ citizens
 
 Go solution to provide a fast way to consult Costa Rican citizens basic information
 
-## Ubuntu Server Setup
+### Ubuntu Server Setup
 
 Install MongoDB following this instructions: [Installing MongoDB on Ubuntu](https://www.digitalocean.com/community/tutorials/how-to-install-mongodb-on-ubuntu-12-04)
 
@@ -80,6 +80,34 @@ echo "export PATH=$PATH:/usr/local/go/bin" >> ~/.profile
 source ~/.profile
 ```
 
+## Compile Server
+
+```console
+sudo nano ~/.bash_profile
+```
+
+Add the following lines to the end of the file
+
+```console
+export GOPATH=/root/packages/
+export CZ_DB_ADDRESS="localhost"
+export CZ_DB_USER="dbuser"
+export CZ_DB_PASS="dbpass"
+```
+
+Save the file and return to the command line.  Run the new configuration
+
+```console
+source ~/.bash_profile
+```
+
+Install package dependencies
+
+```console
+go get labix.org/v2/mgo
+go get github.com/go-martini/martini
+go get github.com/greivinlopez/skue
+```
 
 
 
