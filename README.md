@@ -3,6 +3,10 @@ citizens
 
 Go solution to provide a fast way to consult Costa Rican citizens basic information
 
+## API Documentation
+
+The Citizens API uses the [REST](http://en.wikipedia.org/wiki/Representational_state_transfer) architectural style.  The API is organized into resources and each resource should be reachable using an unique [URI](http://en.wikipedia.org/wiki/Uniform_resource_identifier).  Different actions occurs depending on the HTTP verb you use to access the resource.  Documentation related to the API can be found here: [Citizens REST API documentation](https://docs.google.com/document/d/1le3ha4-xpwngwl1NQEHjQJjm55fH2f4rSKvWHttXBOA/)
+
 ## Ubuntu Server Setup
 
 ### Install MongoDB
@@ -20,9 +24,19 @@ Add admin user to mongo:
 ```javascript
 use admin
 
-db.addUser( { user: "adminuser",
-              pwd: "adminpassword",
-              roles: [ "userAdminAnyDatabase" ] } )
+db.createUser(
+  {
+    user: "adminuser",
+    pwd: "adminpassword",
+    roles:
+    [
+      {
+        role: "userAdminAnyDatabase",
+        db: "admin"
+      }
+    ]
+  }
+)
 ```
 
 Edit mongodb.conf and add auth=true
@@ -41,16 +55,19 @@ Run the MongoDB shell
 mongo
 ```
 
-Create a user for necesitotaxi
+Create a user for people database
 
 ```javascript
 use admin
 db.auth('adminuser', 'adminpassword')
 use people
-db.addUser( { user: "dbuser",
-              pwd: "dbpass",
-              roles: [ "readWrite", "dbAdmin" ]
-            } )
+db.createUser(
+    {
+      user: "dbuser",
+      pwd: "dbpass",
+      roles: [ "readWrite", "dbAdmin" ]
+    }
+)
 db.auth('dbuser', 'dbpass')
 ```
 
