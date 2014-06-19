@@ -5,7 +5,7 @@ Go solution to provide a fast way to consult Costa Rican citizens basic informat
 
 ## API Documentation
 
-The Citizens API uses the [REST](http://en.wikipedia.org/wiki/Representational_state_transfer) architectural style.  The API is organized into resources and each resource should be reachable using an unique [URI](http://en.wikipedia.org/wiki/Uniform_resource_identifier).  Different actions occurs depending on the HTTP verb you use to access the resource.  Documentation related to the API can be found here: [Citizens REST API documentation](https://github.com/greivinlopez/citizens/blob/master/CitizensAPIDocumentation.pdf)
+The Citizens API uses the [REST](http://en.wikipedia.org/wiki/Representational_state_transfer) architectural style.  The API is organized into resources and each resource should be reachable using an unique [URI](http://en.wikipedia.org/wiki/Uniform_resource_identifier).  Different actions occurs depending on the HTTP verb you use to access the resource.  Documentation related to the API can be found here: [Citizens REST API documentation](https://github.com/greivinlopez/citizens/blob/master/CitizensAPIDocumentation.pdf?raw=true)
 
 ## Ubuntu Server Setup
 
