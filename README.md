@@ -26,8 +26,8 @@ use admin
 
 db.createUser(
   {
-    user: "adminnecesitotaxi",
-    pwd: "2013$taxXi",
+    user: "adminuser",
+    pwd: "adminpassword",
     roles:
     [
       {
@@ -63,8 +63,8 @@ db.auth('adminuser', 'adminpassword')
 use people
 db.createUser(
     {
-      user: "necesitotaxi",
-      pwd: "2013$taxXi",
+      user: "dbuser",
+      pwd: "dbpass",
       roles: [ "readWrite", "dbAdmin" ]
     }
 )
