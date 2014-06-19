@@ -16,7 +16,7 @@ func getPersonHandler(params martini.Params, w http.ResponseWriter, r *http.Requ
 	id := params["id"]
 	person, err := database.ReadPerson(id)
 	if err != nil {
-		skue.ServiceResponse(w, http.StatusNotFound, "Shift not found")
+		skue.ServiceResponse(w, http.StatusNotFound, "Citizen not found")
 	} else {
 		skue.ToJson(w, http.StatusOK, person)
 	}
