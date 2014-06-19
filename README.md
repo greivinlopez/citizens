@@ -24,9 +24,19 @@ Add admin user to mongo:
 ```javascript
 use admin
 
-db.addUser( { user: "adminuser",
-              pwd: "adminpassword",
-              roles: [ "userAdminAnyDatabase" ] } )
+db.createUser(
+  {
+    user: "adminnecesitotaxi",
+    pwd: "2013$taxXi",
+    roles:
+    [
+      {
+        role: "userAdminAnyDatabase",
+        db: "admin"
+      }
+    ]
+  }
+)
 ```
 
 Edit mongodb.conf and add auth=true
@@ -45,16 +55,19 @@ Run the MongoDB shell
 mongo
 ```
 
-Create a user for necesitotaxi
+Create a user for people database
 
 ```javascript
 use admin
 db.auth('adminuser', 'adminpassword')
 use people
-db.addUser( { user: "dbuser",
-              pwd: "dbpass",
-              roles: [ "readWrite", "dbAdmin" ]
-            } )
+db.createUser(
+    {
+      user: "necesitotaxi",
+      pwd: "2013$taxXi",
+      roles: [ "readWrite", "dbAdmin" ]
+    }
+)
 db.auth('dbuser', 'dbpass')
 ```
 
