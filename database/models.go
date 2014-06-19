@@ -74,11 +74,9 @@ func CreateIndex() (err error) {
 
 	// Index
 	index := mgo.Index{
-		Key:        []string{"identification"},
-		Unique:     true,
-		DropDups:   true,
-		Background: true,
-		Sparse:     true,
+		Key:      []string{"identification"},
+		Unique:   true,
+		DropDups: true,
 	}
 
 	err = c.EnsureIndex(index)
