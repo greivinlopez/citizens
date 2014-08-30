@@ -85,9 +85,9 @@ https://www.digitalocean.com/community/tutorials/how-to-securely-configure-a-pro
 
 ```console
 cd ~
-wget http://golang.org/dl/go1.2.2.linux-amd64.tar.gz
-tar -zxvf go1.2.2.linux-amd64.tar.gz
-rm go1.2.2.linux-amd64.tar.gz
+wget https://storage.googleapis.com/golang/go1.3.1.linux-amd64.tar.gz
+tar -zxvf go1.3.1.linux-amd64.tar.gz
+rm go1.3.1.linux-amd64.tar.gz
 ```
 
 Binary distributions assume they will be installed at /usr/local/go Otherwise, you must set the GOROOT environment variable
