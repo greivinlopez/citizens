@@ -1,4 +1,4 @@
-citizens
+Citizens
 ========
 
 Go solution to provide a fast way to consult Costa Rican citizens basic information
@@ -184,5 +184,6 @@ cd server
 go build server.go
 ./server
 ```
+[![License](http://img.shields.io/:license-mit-blue.svg)](http://opensource.org/licenses/MIT)
 
 [![baby-gopher](https://raw2.github.com/drnic/babygopher-site/gh-pages/images/babygopher-badge.png)](http://www.babygopher.org)
