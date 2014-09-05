@@ -1,4 +1,4 @@
-![citizens-logo](https://raw.githubusercontent.com/greivinlopez/citizens/master/citizenslogo.png)
+![citizens-logo](https://raw.githubusercontent.com/greivinlopez/citizens/master/citizenslogosmall.png)
 
 A [Go](http://golang.org/) solution to provide a fast way to consult Costa Rican citizens basic information
 
