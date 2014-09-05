@@ -1,6 +1,8 @@
 Citizens
 ========
 
+![citizens-logo](https://raw.githubusercontent.com/greivinlopez/citizens/master/citizenslogo.png)
+
 Go solution to provide a fast way to consult Costa Rican citizens basic information
 
 ## API Documentation
