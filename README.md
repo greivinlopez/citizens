@@ -130,7 +130,7 @@ source ~/.bash_profile
 Install package dependencies
 
 ```console
-go get labix.org/v2/mgo
+go get -u gopkg.in/mgo.v2
 go get github.com/go-martini/martini
 go get github.com/greivinlopez/skue
 ```
