@@ -1,4 +1,4 @@
-![citizens-logo](https://raw.githubusercontent.com/greivinlopez/citizens/master/citizenslogo.png)
+![citizens-logo](https://raw.githubusercontent.com/greivinlopez/citizens/master/citizenslogosmall.png)
 
 A [Go](http://golang.org/) solution to provide a fast way to consult Costa Rican citizens basic information
 
@@ -130,8 +130,8 @@ source ~/.bash_profile
 Install package dependencies
 
 ```console
-go get labix.org/v2/mgo
-go get github.com/go-martini/martini
+go get -u gopkg.in/mgo.v2
+go get -u gopkg.in/martini.v0
 go get github.com/greivinlopez/skue
 ```
 
