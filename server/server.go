@@ -2,8 +2,8 @@ package main
 
 import (
 	"../database"
-	"github.com/go-martini/martini"
 	"github.com/greivinlopez/skue"
+	"gopkg.in/martini.v1"
 	"net/http"
 )
 
