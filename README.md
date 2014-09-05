@@ -131,7 +131,7 @@ Install package dependencies
 
 ```console
 go get -u gopkg.in/mgo.v2
-go get github.com/go-martini/martini
+go get -u gopkg.in/martini.v0
 go get github.com/greivinlopez/skue
 ```
 
