@@ -25,8 +25,8 @@ use admin
 
 db.createUser(
   {
-    user: "adminuser",
-    pwd: "adminpassword",
+    user: "<adminuser>",
+    pwd: "<adminpassword>",
     roles:
     [
       {
@@ -37,6 +37,7 @@ db.createUser(
   }
 )
 ```
+Substitute the values between the <> with the ones you want to use for MongoDB admin user
 
 Edit mongodb.conf and add auth=true
 
@@ -58,17 +59,28 @@ Create a user for people database
 
 ```javascript
 use admin
-db.auth('adminuser', 'adminpassword')
+db.auth('<adminuser>', '<adminpassword>')
 use people
 db.createUser(
-    {
-      user: "dbuser",
-      pwd: "dbpass",
-      roles: [ "readWrite", "dbAdmin" ]
-    }
+	{
+	    user: "<dbuser>",
+	    pwd: "<dbpassword>",
+	    roles : [
+			{
+				role : "readWrite",
+				db : "people"
+			},
+			{
+				role : "dbAdmin",
+				db : "people"
+			}
+		]
+	}
 )
-db.auth('dbuser', 'dbpass')
+db.auth('<dbuser>', '<dbpassword>')
 ```
+
+Again remember to substitute the values between <> with your own credentials.
 
 Create a dummy document to save the new database permanently
 
@@ -106,6 +118,8 @@ apt-get install bzr
 
 ### Server Configuration
 
+The server application follows the recomendation of the twelve-factor app regarding [configuration](http://12factor.net/config). Store the configuration in environment variables. To set the variables use the "export" command. For instance:
+
 ```console
 sudo nano ~/.bash_profile
 ```
@@ -115,8 +129,9 @@ Add the following lines to the end of the file
 ```console
 export GOPATH=/root/packages/
 export CZ_DB_ADDRESS="localhost"
-export CZ_DB_USER="dbuser"
-export CZ_DB_PASS="dbpass"
+export CZ_DB_USER="<dbuser>"
+export CZ_DB_PASS="<dbpassword>"
+export CZ_API_KEY="<apikey>"
 ```
 
 Save the file and return to the command line.  Run the new configuration
@@ -125,13 +140,15 @@ Save the file and return to the command line.  Run the new configuration
 source ~/.bash_profile
 ```
 
+The values you use for *dbuser* and *dbpassword* must be the same you use when creating the database user in the previous steps.  The value for *apikey* will hold the API key the clients will use to make requests to the server. Ensure to use a long key value that includes numbers, letters, symbols and to keep it secured.
+
 ## Running Server
 
 Install package dependencies
 
 ```console
 go get -u gopkg.in/mgo.v2
-go get -u gopkg.in/martini.v0
+go get -u gopkg.in/martini.v1
 go get github.com/greivinlopez/skue
 ```
 
