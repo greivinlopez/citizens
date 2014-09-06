@@ -5,9 +5,10 @@ import (
 	"github.com/greivinlopez/skue"
 	"gopkg.in/martini.v1"
 	"net/http"
+	"os"
 )
 
-const API_KEY = "1QOna4hcXzKZYa3owkPUw2UzZqFSRfQnmhWcm2uE"
+var apiKey string
 
 // ----------------------------------------------------------------------------
 // HANDLERS
@@ -23,11 +24,13 @@ func getPersonHandler(params martini.Params, w http.ResponseWriter, r *http.Requ
 }
 
 func main() {
+	apiKey = os.Getenv("CZ_API_KEY")
+
 	m := martini.Classic()
 
 	// Validate an API key: Authorization
 	m.Use(func(res http.ResponseWriter, req *http.Request) {
-		if req.Header.Get("X-API-KEY") != API_KEY {
+		if req.Header.Get("X-API-KEY") != apiKey {
 			skue.ServiceResponse(res, http.StatusUnauthorized, "You are not authorized to access this resource.")
 		}
 	})
