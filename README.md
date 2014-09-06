@@ -37,7 +37,7 @@ db.createUser(
   }
 )
 ```
-Substitute <adminuser> and <adminpassword> with the values you want to use for MongoDB admin user
+Substitute the values between the <> with the ones you want to use for MongoDB admin user
 
 Edit mongodb.conf and add auth=true
 
@@ -148,7 +148,7 @@ Install package dependencies
 
 ```console
 go get -u gopkg.in/mgo.v2
-go get -u gopkg.in/martini.v0
+go get -u gopkg.in/martini.v1
 go get github.com/greivinlopez/skue
 ```
 
