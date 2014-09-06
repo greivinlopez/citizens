@@ -64,7 +64,7 @@ use people
 db.createUser(
 	{
 	    user: "<dbuser>",
-            pwd: "<dbpassword>",
+	    pwd: "<dbpassword>",
 	    roles : [
 			{
 				role : "readWrite",
