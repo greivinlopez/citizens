@@ -140,7 +140,7 @@ Save the file and return to the command line.  Run the new configuration
 source ~/.bash_profile
 ```
 
-The values you use for <dbuser> and <dbpassword> must be the same you use when creating the database user in the previous steps.  The value for <apikey> will hold the API key the clients will use to make requests to the server. Ensure to use a long key value that includes numbers, letters, symbols and to keep it secured.
+The values you use for *dbuser* and *dbpassword* must be the same you use when creating the database user in the previous steps.  The value for *apikey* will hold the API key the clients will use to make requests to the server. Ensure to use a long key value that includes numbers, letters, symbols and to keep it secured.
 
 ## Running Server
 
