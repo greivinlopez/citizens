@@ -10,7 +10,7 @@ import (
 )
 
 var (
-	districts map[string]database.Address
+	districts map[string]citizen.Address
 	genders   map[string]string = map[string]string{
 		"1": "M",
 		"2": "F",
@@ -18,7 +18,7 @@ var (
 )
 
 func loadDistrics() {
-	districts = map[string]database.Address{}
+	districts = map[string]citizen.Address{}
 
 	file, err := os.Open("Distelec.txt")
 	if err != nil {
@@ -40,7 +40,7 @@ func loadDistrics() {
 		city := getRecord(record[2])
 		district := getRecord(record[3])
 
-		address := &database.Address{province, city, district}
+		address := &citizen.Address{province, city, district}
 		districts[id] = *address
 	}
 }
@@ -70,7 +70,7 @@ func loadPeople() {
 		last := getRecord(record[7])
 		address := districts[districtId]
 
-		person := &database.Person{id, name, first, last, gender, address}
+		person := &citizen.Citizen{id, name, first, last, gender, address}
 		err = person.Create()
 		if err != nil {
 			fmt.Println("Error:", err)
@@ -84,7 +84,7 @@ func getRecord(record string) string {
 }
 
 func main() {
-	err := database.CreateIndex()
+	err := citizen.CreateIndex()
 	if err != nil {
 		panic(err)
 		os.Exit(1)

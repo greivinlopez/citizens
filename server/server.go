@@ -2,7 +2,7 @@ package main
 
 import (
 	"../database"
-	"github.com/greivinlopez/skue"
+	"gopkg.in/greivinlopez/skue.v2"
 	"gopkg.in/martini.v1"
 	"net/http"
 	"os"
@@ -13,14 +13,10 @@ var apiKey string
 // ----------------------------------------------------------------------------
 // HANDLERS
 
-func getPersonHandler(params martini.Params, w http.ResponseWriter, r *http.Request) {
+func getCitizen(params martini.Params, w http.ResponseWriter, r *http.Request) {
 	id := params["id"]
-	person, err := database.ReadPerson(id)
-	if err != nil {
-		skue.ServiceResponse(w, http.StatusNotFound, "Citizen not found")
-	} else {
-		skue.ToJson(w, http.StatusOK, person)
-	}
+	citizen := citizen.New(id)
+	skue.Read(citizen, w)
 }
 
 func main() {
@@ -36,7 +32,7 @@ func main() {
 	})
 
 	// Citizens API
-	m.Get("/citizens/:id", getPersonHandler)
+	m.Get("/citizens/:id", getCitizen)
 	m.Any("/citizens/:id", skue.NotAllowed)
 
 	// Running on an unassigned port by IANA: http://en.wikipedia.org/wiki/List_of_TCP_and_UDP_port_numbers

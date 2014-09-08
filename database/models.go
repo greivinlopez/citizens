@@ -1,4 +1,4 @@
-package database
+package citizen
 
 import (
 	"gopkg.in/mgo.v2"
@@ -6,7 +6,7 @@ import (
 	"os"
 )
 
-type Person struct {
+type Citizen struct {
 	Identification string
 	FirstName      string
 	LastName       string
@@ -24,7 +24,7 @@ type Address struct {
 var (
 	mgoSession *mgo.Session
 	dbname     string = "people"
-	collection string = "persons"
+	collection string = "citizens"
 )
 
 func getSession() *mgo.Session {
@@ -43,26 +43,44 @@ func getSession() *mgo.Session {
 	return mgoSession.Clone()
 }
 
-func (person *Person) Create() (err error) {
+func New(id string) *Citizen {
+	return &Citizen{
+		Identification: id,
+		FirstName:      "",
+		LastName:       "",
+		SurName:        "",
+		Gender:         "",
+		Address:        Address{},
+	}
+}
+
+func (citizen *Citizen) Read() (err error) {
 	// Create MongoDB session
 	session := getSession()
 	defer session.Close()
 
 	c := session.DB(dbname).C(collection)
-	err = c.Insert(&person)
+	query := bson.M{"identification": citizen.Identification}
+	err = c.Find(query).One(&citizen)
+	return err
+}
+
+func (citizen *Citizen) Create() (err error) {
+	// Create MongoDB session
+	session := getSession()
+	defer session.Close()
+
+	c := session.DB(dbname).C(collection)
+	err = c.Insert(&citizen)
 	return
 }
 
-func ReadPerson(id string) (person Person, err error) {
-	// Create MongoDB session
-	session := getSession()
-	defer session.Close()
+func (citizen *Citizen) Update() (err error) {
+	return nil
+}
 
-	c := session.DB(dbname).C(collection)
-	query := bson.M{"identification": id}
-	person = Person{}
-	err = c.Find(query).One(&person)
-	return person, err
+func (citizen *Citizen) Delete() (err error) {
+	return nil
 }
 
 func CreateIndex() (err error) {
