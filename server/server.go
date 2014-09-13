@@ -2,7 +2,7 @@ package main
 
 import (
 	"../database"
-	"gopkg.in/greivinlopez/skue.v2"
+	"github.com/greivinlopez/skue"
 	"gopkg.in/martini.v1"
 	"net/http"
 	"os"
@@ -16,7 +16,7 @@ var apiKey string
 func getCitizen(params martini.Params, w http.ResponseWriter, r *http.Request) {
 	id := params["id"]
 	citizen := citizen.New(id)
-	skue.Read(citizen, w)
+	skue.Read(citizen, nil, w)
 }
 
 func main() {

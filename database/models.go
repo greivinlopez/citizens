@@ -1,6 +1,7 @@
 package citizen
 
 import (
+	"github.com/greivinlopez/skue"
 	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
 	"os"
@@ -54,7 +55,7 @@ func New(id string) *Citizen {
 	}
 }
 
-func (citizen *Citizen) Read() (err error) {
+func (citizen *Citizen) Read(cache skue.MemoryCacher) (err error) {
 	// Create MongoDB session
 	session := getSession()
 	defer session.Close()
@@ -75,11 +76,11 @@ func (citizen *Citizen) Create() (err error) {
 	return
 }
 
-func (citizen *Citizen) Update() (err error) {
+func (citizen *Citizen) Update(cache skue.MemoryCacher) (err error) {
 	return nil
 }
 
-func (citizen *Citizen) Delete() (err error) {
+func (citizen *Citizen) Delete(cache skue.MemoryCacher) (err error) {
 	return nil
 }
 
