@@ -97,7 +97,13 @@ func loadPeople() {
 		last := getRecord(record[7])
 		address := districts[districtId]
 
-		person := &citizen.Citizen{id, name, first, last, gender, address}
+		person := citizen.New(id)
+		person.FirstName = name
+		person.LastName = first
+		person.SurName = last
+		person.Gender = gender
+		person.Address = address
+
 		err = person.Create()
 		if err != nil {
 			fmt.Println("Error:", err)
@@ -111,6 +117,15 @@ func loadPeople() {
 // trailing spaces
 func getRecord(record string) string {
 	return strings.TrimSpace(strings.Title(strings.ToLower(record)))
+}
+
+func init() {
+	// Load configuration from environment variables
+	citizen.ServerAddress = os.Getenv("CZ_DB_ADDRESS")
+	citizen.Username = os.Getenv("CZ_DB_USER")
+	citizen.Password = os.Getenv("CZ_DB_PASS")
+	citizen.Database = "people"
+	citizen.CreateMongoPersistor()
 }
 
 func main() {

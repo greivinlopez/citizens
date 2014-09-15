@@ -22,9 +22,17 @@ package citizen
 
 import (
 	"github.com/greivinlopez/skue"
+	"github.com/greivinlopez/skue/database"
 	"gopkg.in/mgo.v2"
-	"gopkg.in/mgo.v2/bson"
-	"os"
+)
+
+var (
+	ServerAddress string // The address to reach the MongoDB server
+	Username      string // The username to connect with the MongoDB server
+	Password      string // The password of the MongoDB user
+	Database      string // The name of the database to store the models
+	mongo         *mongodb.MongoDBPersistor
+	mgoSession    *mgo.Session
 )
 
 // Citizen represents a Costa Rican citizen.
@@ -44,11 +52,10 @@ type Address struct {
 	District string
 }
 
-var (
-	mgoSession *mgo.Session
-	dbname     string = "people"
-	collection string = "citizens"
-)
+// Creates a MongoDB persistor to interact with the database
+func CreateMongoPersistor() {
+	mongo = mongodb.New(ServerAddress, Username, Password, Database)
+}
 
 // ----------------------------------------------------------------------------
 // 			MONGODB
@@ -57,10 +64,10 @@ func getSession() *mgo.Session {
 	if mgoSession == nil {
 		var err error
 		dialInfo := mgo.DialInfo{}
-		dialInfo.Addrs = []string{os.Getenv("CZ_DB_ADDRESS")}
-		dialInfo.Username = os.Getenv("CZ_DB_USER")
-		dialInfo.Password = os.Getenv("CZ_DB_PASS")
-		dialInfo.Database = dbname
+		dialInfo.Addrs = []string{ServerAddress}
+		dialInfo.Username = Username
+		dialInfo.Password = Password
+		dialInfo.Database = Database
 		mgoSession, err = mgo.DialWithInfo(&dialInfo)
 		if err != nil {
 			panic(err) // no, not really
@@ -78,7 +85,7 @@ func CreateIndex() (err error) {
 	session := getSession()
 	defer session.Close()
 	// Get the collection
-	c := session.DB(dbname).C(collection)
+	c := session.DB("people").C("citizens")
 	// Create the index
 	index := mgo.Index{
 		Key:      []string{"identification"},
@@ -109,23 +116,12 @@ func New(id string) *Citizen {
 // ----------------------------------------------------------------------------
 
 func (citizen *Citizen) Read(cache skue.MemoryCacher) (err error) {
-	// Create MongoDB session
-	session := getSession()
-	defer session.Close()
-
-	c := session.DB(dbname).C(collection)
-	query := bson.M{"identification": citizen.Identification}
-	err = c.Find(query).One(&citizen)
-	return err
+	err = mongo.Read(cache, &citizen, "citizens", "identification", citizen.Identification)
+	return
 }
 
 func (citizen *Citizen) Create() (err error) {
-	// Create MongoDB session
-	session := getSession()
-	defer session.Close()
-
-	c := session.DB(dbname).C(collection)
-	err = c.Insert(&citizen)
+	err = mongo.Create(&citizen, "citizens")
 	return
 }
 
@@ -135,6 +131,10 @@ func (citizen *Citizen) Update(cache skue.MemoryCacher) (err error) {
 
 func (citizen *Citizen) Delete(cache skue.MemoryCacher) (err error) {
 	return nil
+}
+
+func (citizen *Citizen) List() (results interface{}, err error) {
+	return nil, nil
 }
 
 // ----------------------------------------------------------------------------

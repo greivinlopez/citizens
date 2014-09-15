@@ -43,9 +43,17 @@ func getCitizen(params martini.Params, w http.ResponseWriter, r *http.Request) {
 
 // ----------------------------------------------------------------------------
 
-func main() {
+func init() {
 	// Retrieve the API security Key from an environment variable
 	apiKey = os.Getenv("CZ_API_KEY")
+	citizen.ServerAddress = os.Getenv("CZ_DB_ADDRESS")
+	citizen.Username = os.Getenv("CZ_DB_USER")
+	citizen.Password = os.Getenv("CZ_DB_PASS")
+	citizen.Database = "people"
+	citizen.CreateMongoPersistor()
+}
+
+func main() {
 
 	// This server uses the wonderful martini package: https://github.com/go-martini/martini
 	m := martini.Classic()
