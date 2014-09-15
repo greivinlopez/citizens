@@ -150,6 +150,7 @@ Install package dependencies
 go get -u gopkg.in/mgo.v2
 go get -u gopkg.in/martini.v1
 go get -u github.com/greivinlopez/skue
+go get -u github.com/greivinlopez/skue/database
 ```
 
 Download source code
