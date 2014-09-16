@@ -147,10 +147,10 @@ The values you use for *dbuser* and *dbpassword* must be the same you use when c
 Install package dependencies
 
 ```console
-go get -u gopkg.in/mgo.v2
-go get -u gopkg.in/martini.v1
-go get -u github.com/greivinlopez/skue
-go get -u github.com/greivinlopez/skue/database
+go get gopkg.in/mgo.v2
+go get gopkg.in/martini.v1
+go get github.com/greivinlopez/skue
+go get github.com/greivinlopez/skue/database
 ```
 
 Download source code
