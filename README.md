@@ -200,6 +200,32 @@ cd server
 go build server.go
 ./server
 ```
+
+### Test the API
+
+We are using curl here but you can use the REST client that you prefer.  Replace "localhost" with the actual host address and "citizensApi" with your own API Key.
+
+```console
+curl --request GET http://localhost:3020/citizens/205480941 --header 'X-API-KEY:citizensApi'
+```
+
+You should receive a response like this one:
+
+```json
+{
+  "Identification": "205480941",
+  "FirstName": "Greivin",
+  "LastName": "Lopez",
+  "SurName": "Paniagua",
+  "Gender": "M",
+  "Address": {
+   "Province": "Alajuela",
+   "City": "Central",
+   "District": "Villa Bonita (Parte Sur)"
+  }
+}
+```
+
 [![License](http://img.shields.io/:license-mit-blue.svg)](http://opensource.org/licenses/MIT)
 
 [![baby-gopher](https://raw2.github.com/drnic/babygopher-site/gh-pages/images/babygopher-badge.png)](http://www.babygopher.org)
