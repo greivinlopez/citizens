@@ -23,12 +23,16 @@ package main
 import (
 	"../database"
 	"github.com/greivinlopez/skue"
+	"github.com/greivinlopez/skue/views"
 	"gopkg.in/martini.v1"
 	"net/http"
 	"os"
 )
 
-var apiKey string
+var (
+	apiKey string
+	view   skue.ViewLayer
+)
 
 // ----------------------------------------------------------------------------
 // 			API Resource Handlers
@@ -38,7 +42,7 @@ var apiKey string
 func getCitizen(params martini.Params, w http.ResponseWriter, r *http.Request) {
 	id := params["id"]
 	citizen := citizen.New(id)
-	skue.Read(citizen, nil, w)
+	skue.Read(view, citizen, nil, w, r)
 }
 
 // ----------------------------------------------------------------------------
@@ -51,6 +55,9 @@ func init() {
 	citizen.Password = os.Getenv("CZ_DB_PASS")
 	citizen.Database = "people"
 	citizen.CreateMongoPersistor()
+
+	// Let's use a JSON view layer: Consume from JSON and produce JSON content.
+	view = *views.NewJSONView()
 }
 
 func main() {
@@ -61,7 +68,7 @@ func main() {
 	// Validate an API key for request authorization
 	m.Use(func(res http.ResponseWriter, req *http.Request) {
 		if req.Header.Get("X-API-KEY") != apiKey {
-			skue.ServiceResponse(res, http.StatusUnauthorized, "You are not authorized to access this resource.")
+			skue.ServiceResponse(view.Producer, res, req, http.StatusUnauthorized, "You are not authorized to access this resource.")
 		}
 	})
 
